@@ -1,0 +1,224 @@
+*{
+  margin:0;
+  padding:0;
+}
+.container{
+  /* background-color :crimson; */
+  background:linear-gradient(135 deg,#850c62,#f80759);
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -90px;
+  
+}
+.app-wrapper{
+  background-color: #fff;
+  min-width: 350px;
+   min-height: 400px; 
+  padding: 30px;
+  box-sizing: 5px;
+  border-radius: 5px;
+  margin-top: 150px;
+}
+.submit{
+  display: flex;
+  text-transform: uppercase;
+  font-size: 20px;
+  border-radius: 25px;
+  color: white;
+  padding: 10px 60px;
+  background: linear-gradient(to right,#1dc3cf,#072bf8);
+  box-shadow: rgba(0,0,0,0.3)0px 19px 38px,rgba(0,0,0,0.22)0px 15px 12px;
+  margin: left;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.submit:hover {
+  background-color: #11fcdd;	
+  border:1px solid #0616f7;
+  
+}
+.title{
+  color: #03aec5;
+  text-align: center;
+  margin: 80px 0px 40px 0px;
+}
+.name,.email,.password,.id,.date{
+  margin: 20px;
+  color: #969292;
+  font-size: 16px;
+}
+.password{
+  margin-bottom: 40px;
+}
+.input{
+  height: 32px;
+  font-size: 20px;
+  outline: none;
+  width: 100%;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: 2px solid black;
+  margin-bottom: 10px;
+}
+.error{
+  color: red;
+}
+
+.addUser,.addBook{
+  display:flex;
+  font-size: 20px;
+  border-radius:20px;
+  padding: 10px 60px;
+  background: linear-gradient(to right,#1dc3cf,#3150fa);
+  margin-left: 20px;
+  padding: auto;
+}
+.addBook:hover {
+  background-color: #11fcdd;	
+  border:1px solid #0616f7;
+  
+}
+.addUser:hover{
+  background-color: #11fcdd;	
+  border:1px solid #0616f7;
+}
+.addSaff{
+  display:flex;
+  font-size: 20px;
+  border-radius:20px;
+  padding: 10px 60px;
+  margin: auto;
+  background-color:#f80759;
+  margin-left: 550px;
+  padding: auto;
+  margin-top: -50px;
+
+}
+.cancel{
+  display:flex;
+  font-size: 20px;
+  border-radius:20px;
+  padding: 10px 60px;
+  margin: auto;
+  background: linear-gradient(to right,#1dc3cf,#3150fa);
+  margin-left: 320px;
+  padding: auto;
+  margin-top: -50px;
+}
+.cancel:hover {
+  background-color: #11fcdd;	
+  border:1px solid #0616f7;
+  
+}
+button:active{
+  transform: translateY(2px);
+}
+.form-success{
+  display: flex;
+  justify-content: center;
+  margin-top: 250px;
+  min-width: 370px;
+  color: #f80759;
+}
+.jumbotron{
+ 
+  background: linear-gradient(to right,#1dc3cf,#3150fa);
+  
+  transition: all 0.1s;
+  display: flex;
+  padding: 30px;
+  
+  text-align: right;
+  color: white;
+  
+  
+}
+.jumbotron h1 {
+  font-size: 30px;
+
+  
+  
+}
+.navbar {
+  overflow: hidden;
+  background: linear-gradient(to right,#1dc3cf,#3150fa);
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+.nav {
+  overflow: hidden;
+  background: linear-gradient(to right,#0429f7,#3150fa);
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+
+
+/* Right-aligned link */
+.jumbaltron.right {
+ 
+  text-align: right;
+  
+  background: linear-gradient(to right,#fa08d2,#e231fa);
+  
+}
+.jumbaltron :hover {
+    background-color: #11fcdd;	
+    border:1px solid #0616f7;
+    
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: rgb(19, 118, 248);
+  color: rgb(255, 240, 240);
+}
+
+/* Active/current link */
+.navbar a.active {
+  background-color: rgb(19, 118, 248);
+  color: rgb(247, 247, 255);
+}
+@media only screen and (max-width:600px) {
+  body {
+      background-color: lightblue
+  }
+
+  .addBook {
+    display: flex;
+    text-transform: uppercase;
+    font-size: 20px;
+    border-radius: 25px;
+    color: white;
+    padding: 10px 60px;
+    background: linear-gradient(to right,#1dc3cf,#072bf8);
+    box-shadow: rgba(0,0,0,0.3)0px 19px 38px,rgba(0,0,0,0.22)0px 15px 12px;
+    margin: left;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.1s;
+  
+  }
+  .addBook:hover {
+    background-color: #11fcdd;	
+    border:1px solid #0616f7;
+    
+  }
+ 
+
+}
