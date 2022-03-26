@@ -21,8 +21,8 @@ function App() {
         <div className="container">
         
           <Switch>
-            <Route exact path="/Login" admin={Login} />
-            <Route exact path="/Welcome" admin={Welcome} />
+            <Route exact path="/Login" component={Login} />
+            <Route path="/Welcome" component={Welcome} />
             <Route  path="/UserList" component={UserList} />
             <Route path="/AddUser" component={AddUser} />
             <Route path="/users/edit/:id" component={AddUser} />
