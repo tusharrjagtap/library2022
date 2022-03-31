@@ -1,87 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Validation from "../component/Validation";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams,Redirect } from "react-router-dom";
+import adminService from '../services/admin.service';
 import "./Login.css";
 function Login() {
+
   //setting errors to empty object
   const [errors, setErrors] = useState({});
   //setting defalut values
+ const [email, setEmail] = useState();
+ const [password, setPassword] = useState();
+ // const [id, setId] = useState();
+  const history = useHistory();
+
+
   const [values, setValues] = useState({
+    
     email: "",
     password: ""
   });
-  // on typing values it will get stored here
-  const handleChange = (event) => {
-    setValues({
-      ...values,
-      [event.target.email]: event.target.value
-    });
-  };
+  //on typing values it will get stored here
+
+  // const handleChange= (event) => {
+  //   console.log("..............", event.target.value,event.target.email);
+  //   setValues({
+  //     ...values,
+  //     [event.target.email]: event.target.value
+  //   });
+  // };
+
   //to avoid refreshment of page after clicking login
-  const handleLogin = (event) => {
-    event.preventDefault();
+  const handleLogin = (props) => {
+    props.preventDefault();
+
     //calling validation
+    const admin = {email,password };
     setErrors(Validation(values));
+    adminService.create(admin)
+    .then(response => {
+      //let admin=JSON.parse(localStorage.setItem(response));
+      localStorage.setItem("admin",JSON.stringify(response))
+      //sessionStorage.setItem("admin", JSON.stringify(response));
+      console.log("from tushar",admin)
+        console.log("admin logged successfully", response.data);
+        console.log("Name", response.data.name);
+        console.log("Email", response.data.email);
+        localStorage.setItem('isLoggedIn',true);
+        history.push("/welcome");
+        setTimeout(() => {
+            window.location.reload();
+        }, 100);
+        
+      
+     
+        // if(response.data)
+        // history.push("/Welcome");
+    })
+    .catch(error => {
+        console.log('something went wrong', error);
+      
+          history.push("/");
+      
+    })
   };
+
+
   return (
-    // <div className="container" style={{ marginTop: "-90px" }}>
-    //   <div className="app-wrapper">
-    //     <div>
-    //       <h2 className="title"> Log in</h2>
-    //     </div>
-    //     <form className="form-wrapper">
-    //       <div className="email">
-    //         <label className="label"> UserName/Email</label>
-    //         <input
-    //           type="email"
-    //           name="email"
-    //           id="email"
-    //           className="input"
-    //           name="email"
-    //           value={values.email}
-    //           onChange={handleChange}
-    //         />
-    //         {errors.email && <p className="error">{errors.email}</p>}
-    //       </div>
-    //       <div className="password">
-    //         <label className="label"> Password</label>
-    //         <input
-    //           type="password"
-    //           name="password"
-    //           id="password"
-    //           className="input"
-    //           name="password"
-    //           value={values.password}
-    //           onChange={handleChange}
-    //         />
-    //         {errors.password && <p className="error">{errors.password}</p>}
-    //       </div>
-    //       <div>
-    //         <button
-    //           type="submit"
-    //           className="submit"
-    //           onClick={(event) => handleLogin(event)}
-    //         >
-    //           LOGIN
-    //         </button>
-    //         <button
-    //           type="button"
-    //           className="cancel"
-    //           onClick={<link to="/"></link>}
-    //         >
-    //           {" "}
-    //           Back{" "}
-    //         </button>
-
-    //         <Link to="/ForgetPass">
-    //           <button className="newUser">Forget Password/Username</button>
-    //         </Link>
-    //       </div>
-
-    //       <from></from>
-    //     </form>
-    //   </div>
-    // </div>
     <div className="back container fluid">
       <div
         class="lcontainer"
@@ -96,10 +80,9 @@ function Login() {
               type="email"
               name="email"
               id="email"
-              
-              // name="email"
-              value={values.email}
-              onChange={handleChange}
+              value={email}
+              //onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="example@test.com"
             />
             {errors.email && <p className="error">{errors.email}</p>}
@@ -111,18 +94,21 @@ function Login() {
               id="password"
               // name="password"
               placeholder="Min 6 charaters long" 
-              value={values.password}
-              onChange={handleChange}
+              value={password}
+              //onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
             {errors.password && <p className="error">{errors.password}</p>}
           {/* <input type="password" placeholder="Min 6 charaters long" /> */}
           {/* <button type="submit">LOGIN</button> */}
-          <button
+          <br/>
+          <button className="btn_login"
               type="submit"
-              onClick={(event) => handleLogin(event)}
+              onClick={(props) => handleLogin(props)}
             >
               LOGIN
             </button>
+
             
         </div>
       </div>

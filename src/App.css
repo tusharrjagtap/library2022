@@ -12,6 +12,13 @@
   align-items: center;
   margin-top: -30px;
 }
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: coral;}
 .app-wrapper {
   background-color: #fff;
   min-width: 350px;
@@ -200,8 +207,8 @@ button:active {
 }
 @media only screen and (max-width: 1600px) {
   body {
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg_LK4RqBCrD5hiSJEZWkv_uKtQuIAWSf4OA&usqp=CAU");
-    background-color: lightblue;
+    /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg_LK4RqBCrD5hiSJEZWkv_uKtQuIAWSf4OA&usqp=CAU"); */
+    background-color: rgb(238, 59, 238);
   }
 
   .addBook {

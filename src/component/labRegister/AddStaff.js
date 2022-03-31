@@ -265,9 +265,10 @@ const AddStaff = () => {
                       
                      
                 <div >
+                  
                     <button onClick={(e) => saveStaff(e)} className="submit" type="submit">Register</button>
-                    <button type='button' className='cancel' onClick={cancelAddUser} > Back</button>
-                    {/* <Link to="/"><button className="submit">Back to List</button></Link> */}
+                    {/* <button type='button' className='cancel' onClick={cancelAddUser} > Back</button> */}<br/>
+                    <Link to="/StaffList"><button className="submit">Back to List</button></Link>
                 </div>
             </form>
             </div>

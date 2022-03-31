@@ -1,7 +1,11 @@
+import { Logout } from "@mui/icons-material";
 import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
 import { Container, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink,useHistory } from "react-router-dom";
+
+
 const Navbar = () => {
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -27,9 +31,21 @@ const Navbar = () => {
                 Contact
               </Button>
 
-              <Button component={NavLink} to="/Login">
-                Login
-              </Button>
+              <div>
+                {(localStorage.getItem("isLoggedIn").toString() == "false") ? (
+                 <Button component={NavLink} to="/login">
+                  Login
+                  </Button>
+                ) : (
+                  <Button  component={NavLink} to="/logout" >
+                  Logout
+                </Button>
+                )}
+
+              </div>
+
+
+
             </div>
           </Toolbar>
           <Toolbar class="active">

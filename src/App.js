@@ -2,6 +2,7 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AddUser from './component/labRegister/AddUser';
 import Login from './admin/Login';
+import Logout from './admin/Logout';
 import Welcome from './admin/Welcome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UserList from './component/list/UserList'
@@ -9,7 +10,9 @@ import StaffList from './component/list/StaffList';
 import AddStaff from './component/labRegister/AddStaff';
 import Header from './component/Header';
 import Footer from "./component/Footer";
+import Home from './component/Home';
 import "./App.css"
+// import AdminLogin from './admin/AdminLogin'
 
 
 function App() {
@@ -21,8 +24,11 @@ function App() {
         <div className="container">
         
           <Switch>
-            <Route exact path="/Login" component={Login} />
-            <Route path="/Welcome" component={Welcome} />
+            <Route exact  path="/" component={Home} />
+            {/* <Route  path="/AdminLogin" component={AdminLogin} /> */}
+            <Route  path="/Login" component={Login} />
+            <Route  path="/Logout" component={Logout} />
+            <Route  path="/Welcome" component={Welcome} />
             <Route  path="/UserList" component={UserList} />
             <Route path="/AddUser" component={AddUser} />
             <Route path="/users/edit/:id" component={AddUser} />

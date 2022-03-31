@@ -35,15 +35,19 @@ const UserList = () => {
 
 
   return (
-    <div className="container" style={{marginTop:"-90px"}}>
-      <h3>List of Users</h3>
+    
+    <div className="container" style={{marginTop:"90px"}}>
+    
       <hr/>
-
+      
 
       <div>
+      <h2>List of Users</h2>
       
-        <table className="table table-bordered table-striped" style={{marginTop:"170px"}}>
+        <table className="table table-bordered table-striped" style={{marginTop:"40px"}}>
+       
           <thead className="thead-dark">
+            
             <tr>
               <th>College_id</th>
               <th>Address</th>
@@ -70,9 +74,9 @@ const UserList = () => {
                 <td>{user.role}</td>
               
                 <td>
-                  <Link className="btn btn-info" to={`users/edit/${user.id}`}>Update</Link>
+                  <Link className="button_update" to={`users/edit/${user.id}`}>Update</Link>
                   
-                  <button className="btn btn-danger ml-2" onClick={() => {
+                  <button className="button_del" onClick={() => {
                     handleDelete(user.id);
                   }}>Delete</button>
                 </td>

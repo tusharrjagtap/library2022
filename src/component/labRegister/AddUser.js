@@ -102,7 +102,7 @@ const AddUser = () => {
                         <input type="text"
                          id="collegeId"
                           className='input'
-                           name='collegeId' value={collegeId}
+                           name='colvalue={collegeId}legeId' 
                             onChange={(e) => setCollegeId(e.target.value)}
                              placeholder="Enter college Id"/>
                         
@@ -171,9 +171,10 @@ const AddUser = () => {
                         placeholder="Enter 10 digit Moblie Number"/>
                        
                       </div>
-                    <button onClick={(e) => saveUser(e)} className="submit" type="submit">Register</button>
-                    <button type='button' className='cancel' onClick={cancelAddUser} > Back</button>
-                    {/* <Link to="/"><button className="submit">Back to List</button></Link> */}
+                    <button onClick={(e) => saveUser(e)} className="submit" type="submit">Register/Update</button>
+                    {/* <button type='button' className='cancel' onClick={cancelAddUser} > Back</button> */}
+                    <br/>
+                    <Link to="/UserList"><button className="submit">Back to List</button></Link>
                 </div>
             </form>
             </div>

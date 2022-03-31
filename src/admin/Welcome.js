@@ -5,14 +5,19 @@ import { Carousel } from "react-bootstrap";
 
 export default function Welcome() {
   const [index, setIndex] = useState(0);
-
+let user=JSON.parse(localStorage.getItem("admin")).data
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   return (
     <div className="wcontainer">
-      <Carousel activeIndex={index} onSelect={handleSelect}>
+      <h3>Welcome to {user.role}  {user.name}</h3>
+      <h4><Link to="/UserList" className="btn btn-primary mb-2">user list</Link></h4>
+      <h4><Link to="/StaffList" className="btn btn-primary mb-2">staff list</Link></h4>
+      <h4><Link to="/AddUser" className="btn btn-primary mb-2">Add users</Link></h4>
+      <h4><Link to="/AddStaff" className="btn btn-primary mb-2">Add Staff</Link></h4>
+      {/* <Carousel activeIndex={index} onSelect={handleSelect}>
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -50,7 +55,7 @@ export default function Welcome() {
             </p>
           </Carousel.Caption>
         </Carousel.Item>
-      </Carousel>
+      </Carousel> */}
     </div>
   );
 }

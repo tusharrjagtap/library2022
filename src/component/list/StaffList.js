@@ -35,15 +35,18 @@ const StaffList = () => {
 
 
   return (
-    <div className="container" style={{marginTop:"-90px"}}>
-      <h3>List of Staff</h3>
+    <div className="container" style={{marginTop:"90px"}}>
+      
       <hr/>
 
 
       <div>
       {/* id,aadhar,first_name,middle_name,last_name, address,email, mobile, password ,dept,join_date,yr_experience,salary */}
-        <table className="table table-bordered table-striped" style={{marginTop:"170px"}}>
+      
+      <h2>List of Staff</h2>  
+      <table className="table table-bordered table-striped" style={{marginTop:"40px"}}>
           <thead className="thead-dark">
+         
             <tr>
                 
             <th>First Name</th>  
@@ -87,12 +90,13 @@ const StaffList = () => {
                 <td>{staff.bonus}</td>
                 <td>{staff.leaving_date}</td>
                 <td>
-                  <Link className="btn btn-info" to={`staffs/edit/${staff.id}`}>Update</Link>
+                  <Link className="button_update" to={`staffs/edit/${staff.id}`}>Update</Link>
                   
-                  <button className="btn btn-danger ml-2" onClick={() => {
+                  <button className="button_del" onClick={() => {
                     handleDelete(staff.id);
                   }}>Delete</button>
                 </td>
+                
               </tr>
             ))
           }
