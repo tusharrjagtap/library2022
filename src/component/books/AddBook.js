@@ -1,99 +1,164 @@
-import React, { useState } from 'react';
- import Validation from '../Validation';
-function AddBook() {
-  //setting errors to empty object
-  const[errors,setErrors]=useState({});
-  //setting defalut values
-  const[values,setValues]=useState({
-    sellername:"",
-    bname:"",
-    aname:"",
-    bookid:"",
-    publisher:"",
-    language:"",
-    entrydate:"",
-    purchasedate:""
+import { useEffect, useState } from 'react';
+import { Link ,useHistory,useParams} from 'react-router-dom';
+import bookService from "../../services/book.service";
 
-  });
-  // on typing values it will get stored here
-  const handleChange=(event)=>{
-               setValues({
-                ...values,
-                [event.target.name]:event.target.value,
-               })
-  };
-  //to avoid refreshment of page after clicking login
-  const handleLogin =(event)=>{
-  event.defaultPrevented();
-    //calling validation
-     setErrors(Validation(values)); 
-  };
-  //to cancel customer add
-  const cancelAddBook=(event)=>{
+
+
+function AddBook() {
+  const [book,setBook] = useState([]);
+  const[title, setTitle] = useState('');
+  const[noOfCopies, setNoOfCopies ]= useState('');
+  const[author, setAuthor] = useState('');
+  const[publisher,setPublisher] = useState('');
+  const[language,  setLanguage] = useState('');
+  const[category,  setCategory] = useState('');
+  const history = useHistory();
+    const {id} = useParams();
+
+    const saveBook = (e) => {
+        e.preventDefault();
+
+        const book = {id,title,noOfCopies,author, publisher,language, category };
+        if (id) {
+            //update
+            bookService.update(book)
+                .then(response => {
+                    console.log('user data updated successfully', response.data);
+                    history.push("/BookList");
+                })
+                .catch(error => {
+                    console.log('Something went wrong', error);
+
+                    history.goBack();
+                }) 
+        } else {
+            //create
+          
+            bookService.create(book)
+            .then(response => {
+                console.log("user added successfully", response.data);
+                history.push("/BookList");
+            })
+            .catch(error => {
+                console.log('something went wroing', error);
+            })
+        }
+    }
+
+//title,noOfCopies,author, publisher,language, category
+      useEffect(() => {
+      if (id) {
+        bookService.get(id)
+              .then(book => {
+                    setTitle(book.data.title);
+                    setNoOfCopies(book.data.noOfCopies);
+                    setAuthor(book.data.author);
+                    setPublisher(book.data.publisher);
+                    setLanguage(book.data.language);
+                    setCategory(book.data.category);
+                 
+              })
+              .catch(error => {
+                  console.log('Something went wrong', error);
+                  history.goBack();
+              })
+      }
+  }, [])
+    const cancelAddUser=(event)=>{
     event.defaultPrevented();
   }
-  return (
-  <>
-          
-  <div className='container' >
-  
-      <div className='app-wrapper'>
-          <div>
-              <h2 className='title'> Add new Book</h2>
+    return(
+      <div className="container">
+         
+          <div className='app-wrapper'>
+              <div>
+              <h2 className='title'> Add Book</h2>
+              </div>
+              <form className='form-wrapper'>
 
-          </div>
-          
-          <form className='form-wrapper' >
+              <div className='name'>
+                <label className='label'>Book Name</label>
+                <input type="text"
+                id="title"
+                className='input' 
+                name='title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter Book name" required/>
 
-                      <div className='name'>
-                      <label className='label'>Enter Book Name</label>
-                        <input type="text"  id="bname" className='input' name='bname' value={values.bname} onChange={handleChange}/>
-                        {errors.bname && <p className='error'>{errors.bname}</p>}
-                      </div>
-                      <div className='name'>
-                      <label className='label'>Enter Author Name</label>
-                        <input type="text"  id="aname" className='input' name='aname' value={values.aname} onChange={handleChange}/>
-                        </div>
-                        <div className='id'>
-                            <label className='label'>Enter Book Id</label>
-                          <input type="text" id='bookid' className='input' name='bookid' value={values.bookid} onChange={handleChange}/>
-                        </div>
-                        <div className='name'>
-                            <label className='label'>Enter Publisher</label>
-                          <input type="text" id='publisher' className='input' name='publisher' value={values.publisher} onChange={handleChange}/>
-                        </div>
+              </div>
+              <div className='name'>
+                <label className='label'>Quantity of Books</label>
+                <input type="text"
+                id="noOfCopies"
+                className='input' 
+                name='noOfCopies'
+                value={noOfCopies}
+                onChange={(e) => setNoOfCopies(e.target.value)}
+                placeholder="Enter Quantity"/>
+              </div>
+                
+              <div className='name'>
+                <label className='label'>Author Name</label>
+                <input type="text"
+                id="author"
+                className='input'
+                name='author' 
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                placeholder="Enter author" required/>
 
-                        <div className='name'>
-                      <label className='label'>Purchased From</label>
-                        <input type="text" id="sellername" className='input' name='sellername' value={values.sellername} onChange={handleChange}/>
-                        {errors.sellername && <p className='error'>{errors.sellername}</p>}
-                      </div>
+              </div>
+              <div className='name'>
+                <label className='label'>Enter Publication Name</label>
+                <input type="text"
+                id="publisher"
+                className='input'
+                name='publisher' 
+                value={publisher}
+                onChange={(e) => setPublisher(e.target.value)}
+                placeholder="Publisher Name"/>
 
-                      <div className='name'>
-                      <label className='label'>Langauage of Book</label>
-                        <input type="text" id="language" className='input' name='language' value={values.language} onChange={handleChange}/>
-                        {errors.language && <p className='error'>{errors.language}</p>}
-                      </div>
+              </div>
+               
+              <div className='name'>
+                <label className='label'>Book Language</label>
+                <input type="text"  
+                id="language" 
+                className='input' 
+                name='language' 
+                value={language} 
+                onChange={(e) => setLanguage(e.target.value)}
+                placeholder="Enter book language"/>
+              </div>
+              <div className='date'>
+                <label className='label'>Book Owner/Category</label>
+                <input type="text"  
+                id="category" 
+                className='input' 
+                name='category' 
+                value={category}
+                placeholder="Category(LIBRARY/DONATED/SHARED)"
+                onChange={(e) => setCategory(e.target.value)} required/>
+                
+              </div>
 
-                        <div className='date'>
-                        <label className='label'>Lab Book Entry Date</label>
-                        <input type="date" name='entrydate' className='input'/>
-                        </div>
 
-                        <div className='date'>
-                        <label className='label'>Purchase Date</label>
-                        <input type="date" name='purchasedate' className='input'/>
-                        </div>
-                      
-                      <div>
-                        <button type='submit' className='addBook' onClick={handleLogin}>Add book</button>
-                      <button type='button' className='cancel' onClick={cancelAddBook}>Cancel</button>
-                      
-                    </div>
-          </form>
-      </div>
-  </div>
-  </>);
+              <div>
+                <button onClick={(e) => saveBook(e)} className="submit" type="submit">Add/Update Book</button>
+                {/* <button type='button' className='cancel' onClick={cancelAddUser} > Back</button> */}
+                <br/>
+                <Link to="/BookList">Back to List</Link>
+              </div>
+
+
+              </form>
+           </div>
+    </div>   
+    
+   )
 }
 
 export default AddBook;
+             
+      

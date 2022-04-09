@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Validation from "../component/Validation";
 import { Link, useHistory, useParams,Redirect } from "react-router-dom";
-import adminService from '../services/admin.service';
-import "./Login.css";
-function Login() {
+import staffService from '../services/staff.service';
+import "../admin/Login.css"
+
+function StaffForgetPassword() {
 
   //setting errors to empty object
   const [errors, setErrors] = useState({});
   //setting defalut values
  const [email, setEmail] = useState();
  const [password, setPassword] = useState();
+ const [newPassword, setNewPassword] = useState();
  // const [id, setId] = useState();
   const history = useHistory();
 
@@ -17,49 +19,36 @@ function Login() {
   const [values, setValues] = useState({
     
     email: "",
-    password: ""
+    password: "",
+    newPassword:""
   });
-  //on typing values it will get stored here
-
-  // const handleChange= (event) => {
-  //   console.log("..............", event.target.value,event.target.email);
-  //   setValues({
-  //     ...values,
-  //     [event.target.email]: event.target.value
-  //   });
-  // };
 
   //to avoid refreshment of page after clicking login
   const handleLogin = (props) => {
     props.preventDefault();
 
     //calling validation
-    const admin = {email,password };
-    setErrors(Validation(values));
-    adminService.login(admin)
+    const user = {email,password ,newPassword};
+
+    staffService.reset(user)
     .then(response => {
       //let admin=JSON.parse(localStorage.setItem(response));
-      localStorage.setItem("admin",JSON.stringify(response))
+      console.log(response);
+      localStorage.setItem("user",JSON.stringify(response))
       //sessionStorage.setItem("admin", JSON.stringify(response));
-      console.log("from tushar",admin)
-        console.log("admin logged successfully", response.data);
+      console.log("from tushar",user)
+        console.log("user logged successfully", response.data);
         console.log("Name", response.data.name);
         console.log("Email", response.data.email);
-        localStorage.setItem('isLoggedIn',true);
-        history.push("/welcome");
-        setTimeout(() => {
-            window.location.reload();
-        }, 100);
-        
-      
-     
+        localStorage.setItem('isChanged',true);
+        history.push("/StaffLogin");  
         // if(response.data)
         // history.push("/Welcome");
     })
     .catch(error => {
-        console.log('Login Failed', error);
+        console.log('Unable to change password', error);
       
-          history.push("/login");
+          history.push("/staffforgetpassword");
       
     })
   };
@@ -72,10 +61,10 @@ function Login() {
         style={{ marginTop: "250px", marginBottom: "100px" }}
       >
         <div class="brand-logo"></div>
-        <div class="brand-title">Login To Your Account</div>
+        <div class="brand-title">Change your Password</div>
         <br />
         <div class="linputs">
-          <label>EMAIL</label>    
+          <label className="passs">EMAIL</label>    
              <input
               type="email"
               name="email"
@@ -85,9 +74,8 @@ function Login() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="example@test.com"
             />
-            {errors.email && <p className="error">{errors.email}</p>}
-          {/* <input type="email" placeholder="example@test.com" /> */}
-          <label>PASSWORD</label>
+           
+          <label className="passs">PASSWORD</label>
               <input
               type="password"
               name="password"
@@ -98,22 +86,32 @@ function Login() {
               //onChange={handleChange}
               onChange={(e) => setPassword(e.target.value)}
             />
-            {errors.password && <p className="error">{errors.password}</p>}
-          {/* <input type="password" placeholder="Min 6 charaters long" /> */}
-          {/* <button type="submit">LOGIN</button> */}
+            <label className="passs">New PASSWORD</label>
+              <input
+              type="password"
+              name="password"
+              id="newpassword"
+              // name="password"
+              placeholder="Min 6 charaters long" 
+              value={newPassword}
+              //onChange={handleChange}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+
           <br/>
           <button className="btn_login"
               type="submit"
               onClick={(props) => handleLogin(props)}
             >
-              LOGIN
+              Submit
             </button>
+           
+            <Link to="/AddStaff"><span className="pass"> Register</span> </Link>
 
-            
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default StaffForgetPassword;

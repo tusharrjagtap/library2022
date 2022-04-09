@@ -90,7 +90,7 @@ const StaffList = () => {
                 <td>{staff.bonus}</td>
                 <td>{staff.leaving_date}</td>
                 <td>
-                  <Link className="button_update" to={`staffs/edit/${staff.id}`}>Update</Link>
+                <Link className="button_update" to={`staffs/edit/${staff.id}`}>Update</Link>
                   
                   <button className="button_del" onClick={() => {
                     handleDelete(staff.id);

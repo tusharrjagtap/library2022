@@ -2,6 +2,24 @@
   margin: 0;
   padding: 0;
 }
+
+.whole-page{
+  position: absolute;
+  background-repeat: 'no-repeat';
+  background-size: cover;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.searchBox {
+  width: 1110px;
+}
+.col-4{
+  margin-top: 60px
+}
 .container {
   /* background-color :crimson; */
   background: linear-gradient(135 deg, #850c62, #f80759);
@@ -12,6 +30,16 @@
   align-items: center;
   margin-top: -30px;
 }
+.pass{
+  font-size: 20px;
+  color:white;
+  font-weight: bold;
+}
+.passs{
+  font-size: 15px;
+  color:white;
+}
+
 th, td {
   padding: 8px;
   text-align: left;
@@ -59,7 +87,7 @@ tr:hover {background-color: coral;}
 .id,
 .date {
   margin: 20px;
-  color: #969292;
+  color: #966fe3;
   font-size: 16px;
 }
 .password {
@@ -148,10 +176,10 @@ button:active {
   font-size: 30px;
 }
 .navbar {
-  overflow: hidden;
-  background: linear-gradient();
+  overflow: none;
+  
   position: sticky;
-  position: -webkit-sticky;
+  position: relative;
   top: 0;
 }
 .nav {
@@ -165,6 +193,11 @@ button:active {
 }
 .IACSD {
   font-family: background;
+}
+.dropdown{
+color: #f70909;
+
+
 }
 /* Style the navigation bar links */
 .navbar a {
@@ -231,4 +264,86 @@ button:active {
     background-color: #11fcdd;
     border: 1px solid #0616f7;
   }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* .navbar {
+  overflow: hidden;
+
+} */
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+  width: auto;
+  right: 449px;
+}
+
+.login-nav {
+  width: 90px;
+}
+
+.login-button {
+  width: auto;
+}
+
+
+.py-3{
+  color: #ec0000;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.py-4{
+  color: #58147d;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+  .py-33{
+  font-size: 55px ;
+  font-weight: bolder;
+  color: #58147d;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+h1 {
+  margin: 10px;
+  font-size: 40px;
+  color: rgb(16, 228, 235);
+}
+
+.search {
+  width: 30%;
+}
+
+ul li {
+  font-size: 20px;
+} 
+.list{
+  margin-top: 9cm
 }

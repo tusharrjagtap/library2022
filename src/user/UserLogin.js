@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Validation from "../component/Validation";
 import { Link, useHistory, useParams,Redirect } from "react-router-dom";
-import adminService from '../services/admin.service';
-import "./Login.css";
-function Login() {
+import userService from '../services/user.service';
+import "../admin/Login.css"
+//import "./Login.css";
+function UserLogin() {
 
   //setting errors to empty object
   const [errors, setErrors] = useState({});
@@ -34,19 +35,20 @@ function Login() {
     props.preventDefault();
 
     //calling validation
-    const admin = {email,password };
+    const user = {email,password };
     setErrors(Validation(values));
-    adminService.login(admin)
+    userService.login(user)
     .then(response => {
       //let admin=JSON.parse(localStorage.setItem(response));
-      localStorage.setItem("admin",JSON.stringify(response))
+      console.log(response);
+      localStorage.setItem("user",JSON.stringify(response))
       //sessionStorage.setItem("admin", JSON.stringify(response));
-      console.log("from tushar",admin)
-        console.log("admin logged successfully", response.data);
+      console.log("from tushar",user)
+        console.log("user logged successfully", response.data);
         console.log("Name", response.data.name);
         console.log("Email", response.data.email);
         localStorage.setItem('isLoggedIn',true);
-        history.push("/welcome");
+        history.push("/userWelcome");
         setTimeout(() => {
             window.location.reload();
         }, 100);
@@ -57,9 +59,9 @@ function Login() {
         // history.push("/Welcome");
     })
     .catch(error => {
-        console.log('Login Failed', error);
+        console.log('something went wrong', error);
       
-          history.push("/login");
+          history.push("/userLogin");
       
     })
   };
@@ -75,7 +77,7 @@ function Login() {
         <div class="brand-title">Login To Your Account</div>
         <br />
         <div class="linputs">
-          <label>EMAIL</label>    
+          <label className="passs">EMAIL</label>    
              <input
               type="email"
               name="email"
@@ -87,7 +89,7 @@ function Login() {
             />
             {errors.email && <p className="error">{errors.email}</p>}
           {/* <input type="email" placeholder="example@test.com" /> */}
-          <label>PASSWORD</label>
+          <label className="passs">PASSWORD</label>
               <input
               type="password"
               name="password"
@@ -108,12 +110,14 @@ function Login() {
             >
               LOGIN
             </button>
-
-            
+            <Link to="/UserForgetPassword" ><span className="pass">Forget Password</span>  </Link>
+            <Link to="/AddUser"><span className="pass">/ Register</span> </Link>
+{/* <link to="/ForgetStaffPassword">Forget Password</link>
+            <link to="/AddStaff">Register</link> */}
         </div>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default UserLogin;
